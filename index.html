@@ -3,6 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Caresia Studio — Chanterelle, la lámpara que es una vela · Hecha a mano en Estepona</title>
+<meta name="description" content="Chanterelle: una lámpara decorativa que, en realidad, es una vela perfumada. Ambre, Écaille y Noir, hechas a mano en Estepona (Málaga).">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Caresia Studio">
+<meta property="og:url" content="https://caresiastudio.es/">
+<meta property="og:title" content="Caresia Studio · Chanterelle, la lámpara que es una vela">
+<meta property="og:description" content="Hecha a mano en Estepona (Málaga). Ambre, Écaille y Noir · Preventa de lanzamiento.">
+<meta property="og:image" content="https://caresiastudio.es/assets/ambiente/ambiente-1.jpg">
+<meta property="og:image:width" content="1388">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Chanterelle Écaille, Ambre y Noir, juntas">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -14,7 +27,7 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="Caresia Studio · Chanterelle, la lámpara que es una vela">
 <meta property="og:description" content="Hecha a mano en Estepona (Málaga). Ambre, Écaille y Noir · Preventa de lanzamiento.">
-<meta property="og:image" content="assets/ambiente/ambiente-1.jpg">
+<meta property="og:image" content="https://caresiastudio.es/assets/ambiente/ambiente-1.jpg">
 <meta name="theme-color" content="#F6ECDC">
 <link rel="icon" href="assets/brand/isotipo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,16 +124,16 @@
         <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,70px);line-height:1;margin-bottom:20px;color:#2A221D;text-wrap:balance">Una lámpara que se enciende como una vela</h2>
         <a href="#tienda" style="display:inline-block;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;color:#2A221D;border-bottom:1px solid #2A221D;padding-bottom:4px">Ver las tres</a>
       </div>
-      <img src="assets/ambiente/ambiente-1.jpg" alt="Chanterelle Écaille, Ambre y Noir, juntas" style="display:block;width:min(1300px,112%);max-width:none;height:auto;margin:clamp(20px,3vw,40px) auto 0;position:relative;left:50%;transform:translateX(-50%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);mask-composite:intersect" />
+      <img src="assets/ambiente/ambiente-1.jpg" alt="Chanterelle Écaille, Ambre y Noir, juntas" style="display:block;width:min(1300px,112%);max-width:none;height:auto;margin:clamp(20px,3vw,40px) 0 0;position:relative;left:50%;transform:translateX(-50%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);mask-composite:intersect" />
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(6px,0.8vw,12px);padding:clamp(6px,0.8vw,12px) clamp(12px,2vw,24px) 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:36px clamp(6px,0.8vw,12px);padding:clamp(6px,0.8vw,12px) clamp(12px,2vw,24px) 0">
       <sc-for list="{{ lookbook }}" as="l" hint-placeholder-count="3">
         <figure onClick="{{ l.open }}" style="cursor:zoom-in">
           <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background-color:#EADBC3;background-image:repeating-linear-gradient(135deg,rgba(94,58,28,0.06) 0 1px,transparent 1px 10px)">
                         <img src="{{ l.src }}" alt="{{ l.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ l.pos }};transition:transform 1.2s ease" style-hover="transform:scale(1.03)" />
           </div>
-          <figcaption style="display:flex;justify-content:space-between;gap:12px;padding:14px 4px 0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">
+          <figcaption style="display:flex;justify-content:space-between;gap:12px;padding:10px 4px 0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">
             <span>{{ l.name }}</span><span style="color:#C06C06">Ampliar +</span>
           </figcaption>
         </figure>
@@ -242,7 +255,7 @@
         <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;text-wrap:pretty"><strong style="font-weight:500;color:#F6ECDC">Caresia</strong> viene de <em>caresse</em>: caricia, en francés. Queremos que cada vela se sienta exactamente así: un gesto pequeño, hecho despacio y con cuidado.</p>
         <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;margin-top:16px;text-wrap:pretty">Trabajamos desde Estepona (Málaga), vertiendo cada pieza a mano. No hay stock esperando en un almacén: hay moldes, pruebas y mucha paciencia. Por eso cada vela sale ligeramente distinta a la anterior.</p>
         <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;margin-top:16px;text-wrap:pretty">Y es que lo que hacemos es mucho más que velas: son piezas pensadas para quedarse en tu casa. Decoran encendidas y apagadas, inspiran y le dan carácter y personalidad a cualquier rincón.</p>
-        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,32px);max-width:540px;margin-top:40px;padding-top:26px;border-top:1px solid rgba(246,236,220,0.18)">
+        <div style="display:flex;justify-content:space-between;gap:clamp(14px,2vw,32px);max-width:540px;margin-top:40px;padding-top:26px;border-top:1px solid rgba(246,236,220,0.18)">
           <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">A mano</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Pieza a pieza</div></div>
           <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">En Estepona</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Málaga</div></div>
           <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">Tandas cortas</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Series limitadas</div></div>
