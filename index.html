@@ -92,7 +92,7 @@
   </header>
 
   <section id="top" style="position:relative;height:calc(100svh - 66px);min-height:560px;max-height:1000px;overflow:hidden;background:#DEC29C">
-    <video data-auto="1" src="assets/video/hero.mp4" autoPlay="{{ true }}" muted="{{ true }}" defaultMuted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 68%;opacity:{{ heroOpacity }};filter:{{ heroFilter }}"></video>
+    <video data-auto="1" src="assets/video/hero.mp4" poster="assets/video/hero-poster.jpg" autoPlay="{{ true }}" muted="{{ true }}" defaultMuted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 68%;opacity:{{ heroOpacity }};filter:{{ heroFilter }}"></video>
     <sc-if value="{{ heroVeil }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:#F6ECDC;opacity:0.14;pointer-events:none"></div></sc-if>
     <sc-if value="{{ heroGrain }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background-image:url(assets/grain.png);background-size:120px 120px;opacity:0.2;mix-blend-mode:soft-light;pointer-events:none"></div></sc-if>
     <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,34,29,0.18) 0%,rgba(42,34,29,0) 30%,rgba(42,34,29,0) 50%,rgba(42,34,29,0.6) 100%);pointer-events:none"></div>
@@ -245,7 +245,7 @@
   <section id="taller" style="background:#2A221D;color:#F6ECDC">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:stretch">
       <div style="position:relative;min-height:clamp(440px,90vw,640px);overflow:hidden;background-color:#5E3A1C">
-        <video data-auto="1" src="assets/video/taller.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+        <video data-auto="1" data-src="assets/video/taller.mp4" preload="none" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
         <div style="position:absolute;inset:0;background-image:url(assets/grain.png);background-size:120px 120px;opacity:0.05;mix-blend-mode:soft-light;pointer-events:none"></div>
       </div>
       <div style="display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,7vw,104px) clamp(24px,5vw,80px)">
@@ -656,7 +656,17 @@ class Component extends DCLogic {
   }
   componentDidUpdate() { this.playVideos(); document.body.style.overflow = (this.state.open || this.state.cartOpen || this.state.legal || this.state.lb != null) ? 'hidden' : ''; }
   componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); clearTimeout(this.tt); }
-  playVideos() { document.querySelectorAll('video[data-auto]').forEach(v => { v.muted = true; v.volume = 0; v.setAttribute('muted', ''); if (v.paused) v.play().catch(() => {}); }); }
+  playVideos() {
+    document.querySelectorAll('video[data-auto]').forEach(v => {
+      v.muted = true; v.volume = 0; v.setAttribute('muted', '');
+      // Vídeos con data-src: solo se descargan cuando están a punto de verse
+      if (v.dataset.src && !v.getAttribute('src')) {
+        if (!v._io) { v._io = new IntersectionObserver(es => { if (es[0].isIntersecting) { v._io.disconnect(); v.src = v.dataset.src; v.play().catch(() => {}); } }, { rootMargin: '600px 0px' }); v._io.observe(v); }
+        return;
+      }
+      if (v.paused) v.play().catch(() => {});
+    });
+  }
 
   onSale() { return this.props.launchOffer ?? true; }
   regular() { return Number(this.props.priceRegular ?? REGULAR) || REGULAR; }
@@ -666,7 +676,7 @@ class Component extends DCLogic {
   media(slug) {
     const b = `assets/productos/${slug}/`;
     return [
-      { type: 'img', src: b + 'miniatura.png', label: '', short: '' },
+      { type: 'img', src: b + 'miniatura.jpg', label: '', short: '' },
       { type: 'img', src: b + 'foto-a.jpg', label: '', short: '' },
       { type: 'img', src: b + 'foto-b.jpg', label: '', short: '' },
       { type: 'img', src: b + 'foto-c.jpg', label: '', short: '' },
