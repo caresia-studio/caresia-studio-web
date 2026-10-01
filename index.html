@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caresia Studio — Chanterelle, la lámpara que es una vela · Hecha a mano en Estepona</title>
+<meta name="description" content="Chanterelle: una lámpara decorativa que, en realidad, es una vela perfumada. Ambre, Écaille y Noir, hechas a mano en Estepona (Málaga). Aroma Atardecer: almendra dulce, cereza y caramelo de mantequilla.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Caresia Studio · Chanterelle, la lámpara que es una vela">
+<meta property="og:description" content="Hecha a mano en Estepona (Málaga). Ambre, Écaille y Noir · Preventa de lanzamiento.">
+<meta property="og:image" content="assets/ambiente/ambiente-1.jpg">
+<meta name="theme-color" content="#F6ECDC">
+<link rel="icon" href="assets/brand/isotipo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>['play','loadedmetadata','volumechange'].forEach(function(ev){document.addEventListener(ev,function(e){var v=e.target;if(v&&v.tagName==='VIDEO'&&(!v.muted||v.volume>0)){v.muted=true;v.volume=0;}},true);});</script>
+<script>document.addEventListener('error',function(e){var t=e.target;if(t&&(t.tagName==='IMG'||t.tagName==='VIDEO'))t.style.visibility='hidden';},true);</script>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:#F6ECDC;color:#2A221D;font-family:'Hanken Grotesk',sans-serif;font-weight:400;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  a{color:#2A221D;text-decoration:none}
+  a:hover{color:#C06C06}
+  input,button,textarea,select{font-family:inherit;color:inherit}
+  button{cursor:pointer}
+  ::selection{background:#EDBE7E;color:#2A221D}
+  :focus-visible{outline:1px solid #C06C06;outline-offset:3px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+  @keyframes slideIn{from{transform:translateX(100%)}to{transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
+</helmet>
+
+<div style="width:100%;background:#F6ECDC;position:relative">
+
+  <header style="position:sticky;top:0;z-index:50;background:rgba(246,236,220,0.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(42,34,29,0.1)">
+    <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:20px;padding:14px clamp(18px,3vw,40px)">
+      <nav style="display:flex;align-items:center;gap:clamp(16px,2.2vw,30px);font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;gap:clamp(16px,2.2vw,30px)">
+            <a href="#tienda">Tienda</a>
+            <a href="#taller">Sobre el proyecto</a>
+            <a href="#ayuda">Preguntas frecuentes</a>
+          </div>
+        </sc-if>
+        <sc-if value="{{ narrow }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ toggleMenu }}" style="background:none;border:none;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;padding:6px 0">{{ menuLabel }}</button>
+        </sc-if>
+      </nav>
+      <a href="#top" aria-label="Caresia Studio — inicio" style="display:block">
+        <img src="assets/brand/logotipo.png" alt="Caresia Studio" style="height:clamp(30px,3.2vw,38px);width:auto;display:block" />
+      </a>
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:clamp(14px,2vw,26px);font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500">
+        <sc-if value="{{ wide }}" hint-placeholder-val="{{ true }}">
+          <a href="#contacto">Contacto</a>
+        </sc-if>
+        <button onClick="{{ openCart }}" style="display:flex;align-items:center;gap:8px;background:none;border:none;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;padding:6px 0">
+          <span>Pedido</span>
+          <span style="display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#2A221D;color:#F6ECDC;font-size:10.5px;letter-spacing:0">{{ cartCount }}</span>
+        </button>
+      </div>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:18px;padding:22px clamp(18px,3vw,40px) 28px;border-top:1px solid rgba(42,34,29,0.1);font-family:'Cormorant Garamond',serif;font-size:28px">
+        <a href="#tienda" onClick="{{ closeMenu }}">Tienda</a>
+        <a href="#taller" onClick="{{ closeMenu }}">Sobre el proyecto</a>
+        <a href="#ayuda" onClick="{{ closeMenu }}">Preguntas frecuentes</a>
+        <a href="#contacto" onClick="{{ closeMenu }}">Contacto</a>
+      </div>
+    </sc-if>
+  </header>
+
+  <section id="top" style="position:relative;height:calc(100svh - 66px);min-height:560px;max-height:1000px;overflow:hidden;background:#DEC29C">
+    <video data-auto="1" src="assets/video/hero.mp4" autoPlay="{{ true }}" muted="{{ true }}" defaultMuted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 68%;opacity:{{ heroOpacity }};filter:{{ heroFilter }}"></video>
+    <sc-if value="{{ heroVeil }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background:#F6ECDC;opacity:0.14;pointer-events:none"></div></sc-if>
+    <sc-if value="{{ heroGrain }}" hint-placeholder-val="{{ true }}"><div style="position:absolute;inset:0;background-image:url(assets/grain.png);background-size:120px 120px;opacity:0.2;mix-blend-mode:soft-light;pointer-events:none"></div></sc-if>
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(42,34,29,0.18) 0%,rgba(42,34,29,0) 30%,rgba(42,34,29,0) 50%,rgba(42,34,29,0.6) 100%);pointer-events:none"></div>
+    <div style="position:absolute;left:clamp(20px,4vw,56px);right:clamp(20px,4vw,56px);bottom:clamp(32px,5vw,64px);display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;color:#F6ECDC">
+      <div style="animation:fadeUp 1.1s ease both .3s">
+        <span style="display:block;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;margin-bottom:14px;text-shadow:0 1px 2px rgba(42,34,29,0.45),0 0 14px rgba(42,34,29,0.35)">Preventa · Primera colección</span>
+        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(60px,10vw,160px);line-height:0.88;letter-spacing:-0.01em;text-shadow:0 2px 6px rgba(42,34,29,0.3),0 0 40px rgba(42,34,29,0.28)">Chanterelle</h1>
+      </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;animation:fadeUp 1.1s ease both .5s">
+        <a href="#tienda" style="display:inline-block;padding:15px 30px;background:#F6ECDC;color:#2A221D;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:#EDBE7E;color:#2A221D">Comprar</a>
+        <a href="#coleccion" style="display:inline-block;padding:15px 30px;border:1px solid rgba(246,236,220,0.8);color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:rgba(246,236,220,0.14);color:#F6ECDC">Descubrir</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:clamp(80px,11vw,150px) 24px;text-align:center">
+    <div style="max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center">
+      <img src="assets/brand/emboss-isologo.png" alt="" style="width:120px;height:auto;margin-bottom:40px" />
+      <p style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(30px,4.2vw,56px);line-height:1.12;color:#2A221D;text-wrap:balance">Una luz encendida cambia una habitación entera, <em style="color:#7A2A2E">y la manera de estar en ella.</em></p>
+      <p style="font-size:16px;color:#5E3A1C;max-width:560px;margin-top:28px;text-wrap:pretty"><em>Chanterelle</em> parece una lámpara, y lo es: decora tu casa apagada. Pero en realidad es una vela. Enciéndela y llena la habitación de luz cálida y de <em>Atardecer</em>, nuestro aroma: dulce, lento y acogedor.</p>
+      <p style="font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#C06C06;margin-top:22px;font-weight:500">Hecha a mano en Estepona (Málaga)</p>
+    </div>
+  </section>
+
+  <section id="coleccion" style="position:relative">
+    <div style="position:relative;overflow:hidden;background:linear-gradient(180deg,#D1B69B 0%,#D6BDA2 45%,#E2CBB3 80%,#E6D1BA 100%);padding-top:clamp(56px,6vw,84px);text-align:center">
+      <div style="position:relative;z-index:1;max-width:640px;margin:0 auto;padding:0 24px">
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#7A2A2E;margin-bottom:14px;font-weight:600">La colección</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,5vw,70px);line-height:1;margin-bottom:20px;color:#2A221D;text-wrap:balance">Una lámpara que se enciende como una vela</h2>
+        <a href="#tienda" style="display:inline-block;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;color:#2A221D;border-bottom:1px solid #2A221D;padding-bottom:4px">Ver las tres</a>
+      </div>
+      <img src="assets/ambiente/ambiente-1.jpg" alt="Chanterelle Écaille, Ambre y Noir, juntas" style="display:block;width:min(1300px,112%);max-width:none;height:auto;margin:clamp(20px,3vw,40px) auto 0;position:relative;left:50%;transform:translateX(-50%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0%,#000 10%,#000 90%,transparent 100%),linear-gradient(to bottom,transparent 0%,#000 12%);mask-composite:intersect" />
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(6px,0.8vw,12px);padding:clamp(6px,0.8vw,12px) clamp(12px,2vw,24px) 0">
+      <sc-for list="{{ lookbook }}" as="l" hint-placeholder-count="3">
+        <figure onClick="{{ l.open }}" style="cursor:zoom-in">
+          <div style="position:relative;aspect-ratio:4/5;overflow:hidden;background-color:#EADBC3;background-image:repeating-linear-gradient(135deg,rgba(94,58,28,0.06) 0 1px,transparent 1px 10px)">
+                        <img src="{{ l.src }}" alt="{{ l.name }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:{{ l.pos }};transition:transform 1.2s ease" style-hover="transform:scale(1.03)" />
+          </div>
+          <figcaption style="display:flex;justify-content:space-between;gap:12px;padding:14px 4px 0;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">
+            <span>{{ l.name }}</span><span style="color:#C06C06">Ampliar +</span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
+
+  <section id="tienda" style="padding:clamp(80px,9vw,130px) clamp(12px,2vw,24px) clamp(80px,10vw,130px);border-top:1px solid rgba(94,58,28,0.14);margin-top:clamp(48px,5vw,72px)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 clamp(6px,1vw,16px) 26px">
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06;margin-bottom:10px">Tienda</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1">Colección Chanterelle</h2>
+      </div>
+      <span style="font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase;color:#5E3A1C">3 piezas · Tiradas limitadas</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(6px,0.8vw,12px)">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="3">
+        <article style="display:flex;flex-direction:column;gap:14px">
+          <div onClick="{{ p.open }}" style="position:relative;aspect-ratio:3/4;overflow:hidden;cursor:pointer;background-color:#EADBC3;background-image:repeating-linear-gradient(135deg,rgba(94,58,28,0.06) 0 1px,transparent 1px 10px)">
+            <img src="{{ p.thumb }}" alt="{{ p.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+            <div style="position:absolute;inset:0;opacity:0;transition:opacity .5s ease" style-hover="opacity:1">
+              <img src="{{ p.hover }}" alt="" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block" />
+            </div>
+            <span style="position:absolute;right:14px;top:14px;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;background:#7A2A2E;color:#F6ECDC;padding:5px 9px">{{ badge }}</span>
+            <button onClick="{{ p.quickAdd }}" aria-label="Añadir al pedido" style="position:absolute;right:14px;bottom:14px;height:40px;padding:0 16px;border:none;background:rgba(246,236,220,0.94);font-size:10.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:#2A221D;color:#F6ECDC">+ Añadir</button>
+          </div>
+          <div onClick="{{ p.open }}" style="display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:0 4px;cursor:pointer">
+            <div>
+              <h3 style="font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:500">{{ p.name }}</h3>
+              <div style="display:flex;align-items:center;gap:8px;margin-top:7px;font-size:13px;color:#5E3A1C">
+                <span style="display:block;width:11px;height:11px;border-radius:50%;background:{{ p.swatch }};box-shadow:0 0 0 1px rgba(42,34,29,0.2)"></span>{{ p.tone }}
+              </div>
+            </div>
+            <span style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap">
+              <span style="font-size:13.5px;font-weight:600;color:#7A2A2E">{{ p.priceLabel }}</span>
+              <sc-if value="{{ p.hasCompare }}" hint-placeholder-val="{{ true }}"><span style="font-size:12.5px;color:#5E3A1C;text-decoration:line-through">{{ p.compareLabel }}</span></sc-if>
+            </span>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+    <div style="margin:clamp(28px,3vw,40px) clamp(6px,1vw,16px) 0;padding:16px 20px;background:#DEC29C;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline">
+      <strong style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;font-weight:600;color:#7A2A2E">Preventa</strong>
+      <span style="font-size:14px;color:#2A221D;text-wrap:pretty">Cada pieza se elabora a mano tras tu pedido. El envío puede tardar entre 15 y 30 días.</span>
+    </div>
+  </section>
+
+  <section id="aroma" style="background:#7A2A2E;color:#F6ECDC;padding:clamp(90px,11vw,150px) clamp(18px,3vw,40px)">
+    <div style="max-width:1240px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:clamp(48px,7vw,110px);align-items:center">
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#EDBE7E;margin-bottom:16px">El aroma</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(52px,6.4vw,96px);line-height:0.95;margin-bottom:26px"><em>Atardecer</em></h2>
+        <p style="font-size:16.5px;color:rgba(246,236,220,0.88);max-width:470px;text-wrap:pretty">Huele a esa hora lenta después de comer, cuando la casa se queda en penumbra y por fin tienes un momento solo para ti. Empieza con unas notas a almendra dulce, se vuelve intenso con la cereza al marrasquino y termina en un profundo cremoso, entre caramelo de mantequilla y vainilla.</p>
+        <p style="font-size:16.5px;color:rgba(246,236,220,0.88);max-width:470px;margin-top:14px;text-wrap:pretty">Seductora, irresistible y muy golosa. La elegimos para que cada <em>Chanterelle</em> huela a pausa, a quedarse.</p>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:34px">
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Sin ftalatos</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Sin parabenos</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Vegana</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Cruelty free</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Certificado IFRA</span>
+          <span style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;border:1px solid rgba(246,236,220,0.4);padding:8px 13px">Conforme CLP</span>
+        </div>
+        <p style="font-size:12.5px;color:rgba(246,236,220,0.7);margin-top:16px;max-width:460px;text-wrap:pretty">Fragancia de alta calidad con certificado IFRA, el estándar internacional de seguridad para fragancias.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;border-top:1px solid rgba(246,236,220,0.22)">
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid rgba(246,236,220,0.22)">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;padding-top:8px">Salida</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,32px);line-height:1.2">Almendra dulce, coco y manzana verde</span>
+        </div>
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid rgba(246,236,220,0.22)">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;padding-top:8px">Corazón</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,32px);line-height:1.2">Cereza al marrasquino, anís estrellado y frambuesa</span>
+        </div>
+        <div style="display:grid;grid-template-columns:110px 1fr;gap:20px;padding:30px 0;border-bottom:1px solid rgba(246,236,220,0.22)">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;padding-top:8px">Fondo</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:clamp(24px,2.6vw,32px);line-height:1.2">Caramelo de mantequilla, vainilla y almizcle suave</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="nombre" style="padding:clamp(90px,11vw,140px) clamp(18px,3vw,40px)">
+    <div style="max-width:1100px;margin:0 auto">
+      <div style="text-align:center;margin-bottom:clamp(44px,6vw,72px)">
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06;margin-bottom:14px">Por qué se llama así</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,5vw,68px);line-height:1">Chanterelle</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:1px;background:rgba(42,34,29,0.14);border:1px solid rgba(42,34,29,0.14)">
+        <div style="background:#F6ECDC;padding:clamp(30px,4vw,48px)">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#C06C06;line-height:1">I</span>
+          <h3 style="font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin:18px 0 10px">Una seta</h3>
+          <p style="font-size:15px;color:#5E3A1C;text-wrap:pretty">Es el nombre francés del rebozuelo, una seta anaranjada y preciosa. Su silueta es la de nuestra lámpara.</p>
+        </div>
+        <div style="background:#F6ECDC;padding:clamp(30px,4vw,48px)">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#C06C06;line-height:1">II</span>
+          <h3 style="font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin:18px 0 10px">Una cuerda</h3>
+          <p style="font-size:15px;color:#5E3A1C;text-wrap:pretty">En música, la <em>chanterelle</em> es la cuerda más aguda de un instrumento: la que canta.</p>
+        </div>
+        <div style="background:#F6ECDC;padding:clamp(30px,4vw,48px)">
+          <span style="font-family:'Cormorant Garamond',serif;font-size:40px;color:#C06C06;line-height:1">III</span>
+          <h3 style="font-size:12.5px;letter-spacing:0.16em;text-transform:uppercase;font-weight:600;margin:18px 0 10px">Un guiño</h3>
+          <p style="font-size:15px;color:#5E3A1C;text-wrap:pretty">Y francés, como <em>caresse</em>, la caricia de la que nace Caresia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="taller" style="background:#2A221D;color:#F6ECDC">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,400px),1fr));align-items:stretch">
+      <div style="position:relative;min-height:clamp(440px,90vw,640px);overflow:hidden;background-color:#5E3A1C">
+        <video data-auto="1" src="assets/video/taller.mp4" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+        <div style="position:absolute;inset:0;background-image:url(assets/grain.png);background-size:120px 120px;opacity:0.05;mix-blend-mode:soft-light;pointer-events:none"></div>
+      </div>
+      <div style="display:flex;flex-direction:column;justify-content:center;padding:clamp(56px,7vw,104px) clamp(24px,5vw,80px)">
+        <img src="assets/brand/isotipo-crema.png" alt="" style="width:74px;height:auto;margin-bottom:36px;opacity:.9" />
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#EDBE7E;margin-bottom:16px">Sobre el proyecto</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:300;font-size:clamp(38px,4.6vw,64px);line-height:1.02;margin-bottom:26px;text-wrap:balance">Una caricia, <em>hecha vela</em></h2>
+        <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;text-wrap:pretty"><strong style="font-weight:500;color:#F6ECDC">Caresia</strong> viene de <em>caresse</em>: caricia, en francés. Queremos que cada vela se sienta exactamente así: un gesto pequeño, hecho despacio y con cuidado.</p>
+        <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;margin-top:16px;text-wrap:pretty">Trabajamos desde Estepona (Málaga), vertiendo cada pieza a mano. No hay stock esperando en un almacén: hay moldes, pruebas y mucha paciencia. Por eso cada vela sale ligeramente distinta a la anterior.</p>
+        <p style="font-size:16px;color:rgba(246,236,220,0.82);max-width:540px;margin-top:16px;text-wrap:pretty">Y es que lo que hacemos es mucho más que velas: son piezas pensadas para quedarse en tu casa. Decoran encendidas y apagadas, inspiran y le dan carácter y personalidad a cualquier rincón.</p>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,32px);max-width:540px;margin-top:40px;padding-top:26px;border-top:1px solid rgba(246,236,220,0.18)">
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">A mano</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Pieza a pieza</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">En Estepona</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Málaga</div></div>
+          <div><div style="font-family:'Cormorant Garamond',serif;font-size:clamp(21px,2vw,28px);line-height:1.1;color:#EDBE7E;text-wrap:balance">Tandas cortas</div><div style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;margin-top:6px;color:rgba(246,236,220,0.7)">Series limitadas</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-comprar" style="padding:clamp(90px,11vw,150px) clamp(18px,3vw,40px) clamp(40px,5vw,64px)">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr));gap:clamp(40px,6vw,90px);align-items:start">
+        <div>
+          <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06;margin-bottom:14px">Cómo comprar</span>
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(36px,4.4vw,58px);line-height:1.02;margin-bottom:22px;text-wrap:balance">Sin pasarela, <em style="color:#7A2A2E">con trato de tú a tú</em></h2>
+          <p style="font-size:15.5px;color:#5E3A1C;max-width:440px;text-wrap:pretty">Cada vela sale del taller en tandas pequeñas, así que los pedidos los cerramos personalmente, por mensaje directo en Instagram.</p>
+        </div>
+        <ol style="list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1px;background:rgba(42,34,29,0.14);border:1px solid rgba(42,34,29,0.14)">
+          <li style="background:#F6ECDC;padding:28px 26px 30px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#C06C06;margin-bottom:16px">01</div>
+            <h3 style="font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;margin-bottom:8px">Elige tu Chanterelle</h3>
+            <p style="font-size:14.5px;color:#5E3A1C">Ámbar, carey o negro: añade las que quieras a tu pedido.</p>
+          </li>
+          <li style="background:#F6ECDC;padding:28px 26px 30px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#C06C06;margin-bottom:16px">02</div>
+            <h3 style="font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;margin-bottom:8px">Envíanoslo por Instagram</h3>
+            <p style="font-size:14.5px;color:#5E3A1C">Pulsa «Pedir por Instagram»: el resumen se copia solo y se abre nuestro chat. Solo tienes que pegarlo y enviarlo.</p>
+          </li>
+          <li style="background:#F6ECDC;padding:28px 26px 30px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#C06C06;margin-bottom:16px">03</div>
+            <h3 style="font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;margin-bottom:8px">Lo cerramos contigo</h3>
+            <p style="font-size:14.5px;color:#5E3A1C">Te escribimos por mensaje directo para confirmar el pedido, la forma de pago y la entrega.</p>
+          </li>
+          <li style="background:#F6ECDC;padding:28px 26px 30px">
+            <div style="font-family:'Cormorant Garamond',serif;font-size:40px;line-height:1;color:#C06C06;margin-bottom:16px">04</div>
+            <h3 style="font-size:12.5px;letter-spacing:0.14em;text-transform:uppercase;font-weight:600;margin-bottom:8px">Llega a tu casa</h3>
+            <p style="font-size:14.5px;color:#5E3A1C">Bien embalada, en 15–30 días. Si estás en Estepona, te la llevamos en mano.</p>
+          </li>
+        </ol>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:clamp(8px,1vw,14px);margin-top:clamp(56px,7vw,90px)">
+        <div style="background:#DEC29C;padding:34px 30px">
+          <span style="display:block;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#5E3A1C;margin-bottom:22px">Envío a domicilio</span>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:60px;line-height:1;font-weight:300">5 €</div>
+          <p style="font-size:14.5px;margin-top:12px;font-weight:500">Península</p>
+        </div>
+        <div style="background:#EDBE7E;padding:34px 30px">
+          <span style="display:block;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#5E3A1C;margin-bottom:22px">Envío a domicilio</span>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:60px;line-height:1;font-weight:300">12 €</div>
+          <p style="font-size:14.5px;margin-top:12px;font-weight:500">Baleares y Canarias</p>
+        </div>
+        <div style="background:#5E3A1C;color:#F6ECDC;padding:34px 30px">
+          <span style="display:block;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;margin-bottom:22px">Entrega en mano</span>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:60px;line-height:1;font-weight:300">Gratis</div>
+          <p style="font-size:14.5px;margin-top:12px;font-weight:500">En Estepona (Málaga), y te ahorras el envío</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ayuda" style="padding:clamp(40px,5vw,64px) clamp(18px,3vw,40px) clamp(90px,11vw,140px)">
+    <div style="max-width:880px;margin:0 auto">
+      <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06;margin-bottom:14px;text-align:center">Preguntas frecuentes</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4vw,52px);line-height:1.05;margin-bottom:48px;text-align:center">Todo lo que quieres saber</h2>
+      <div style="border-top:1px solid rgba(42,34,29,0.18)">
+        <sc-for list="{{ faqs }}" as="q" hint-placeholder-count="5">
+          <div style="border-bottom:1px solid rgba(42,34,29,0.18)">
+            <button onClick="{{ q.toggle }}" style="width:100%;display:flex;justify-content:space-between;align-items:center;gap:20px;background:none;border:none;padding:24px 2px;text-align:left;font-size:16px;font-weight:500">
+              <span>{{ q.q }}</span>
+              <span style="font-family:'Cormorant Garamond',serif;font-size:28px;line-height:1;color:#C06C06;flex:none">{{ q.sign }}</span>
+            </button>
+            <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+              <p style="padding:0 2px 26px;font-size:15px;color:#5E3A1C;max-width:720px;text-wrap:pretty"><sc-for list="{{ q.parts }}" as="pt"><sc-if value="{{ pt.em }}"><em>{{ pt.t }}</em></sc-if><sc-if value="{{ pt.plain }}">{{ pt.t }}</sc-if></sc-for></p>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="newsletter" style="background:#EDBE7E;padding:clamp(80px,10vw,130px) 24px;text-align:center;position:relative;overflow:hidden">
+    <div style="max-width:640px;margin:0 auto;position:relative;display:flex;flex-direction:column;align-items:center">
+      <img src="assets/brand/emboss-logotipo-web.png" alt="" style="width:min(340px,70vw);height:auto;margin-bottom:38px" />
+      <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#7A2A2E;margin-bottom:14px;font-weight:600">El círculo Caresia</span>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(34px,4.4vw,56px);line-height:1.04;margin-bottom:16px;text-wrap:balance">Descuentos, nuevas tandas y novedades, antes que nadie</h2>
+      <p style="font-size:15.5px;color:#5E3A1C;max-width:460px;margin-bottom:34px;text-wrap:pretty">Síguenos en Instagram: allí anunciamos primero cada nueva colección, los descuentos y cómo va el taller.</p>
+      <a href="https://instagram.com/caresia.studio" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;height:52px;padding:0 32px;background:#2A221D;color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:#7A2A2E;color:#F6ECDC">Seguir a @caresia.studio</a>
+    </div>
+  </section>
+
+  <section style="padding:clamp(80px,9vw,120px) clamp(12px,2vw,24px)">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;flex-wrap:wrap;padding:0 clamp(6px,1vw,16px) 26px">
+      <div>
+        <span style="display:block;font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06;margin-bottom:10px">Instagram</span>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,3.4vw,44px);line-height:1">Síguenos en el proceso...</h2>
+      </div>
+      <a href="https://instagram.com/caresia.studio" target="_blank" rel="noopener" style="font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;border-bottom:1px solid #2A221D;padding-bottom:4px">@caresia.studio</a>
+    </div>
+    <sc-if value="{{ hasInsta }}" hint-placeholder-val="{{ true }}"><div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(46%,180px),1fr));gap:clamp(6px,0.8vw,12px)">
+      <sc-for list="{{ insta }}" as="g" hint-placeholder-count="6">
+        <a href="{{ g.href }}" target="_blank" rel="noopener" style="position:relative;display:block;aspect-ratio:1/1;overflow:hidden;background-color:#EADBC3;background-image:repeating-linear-gradient(135deg,rgba(94,58,28,0.06) 0 1px,transparent 1px 10px)">
+                    <img src="{{ g.src }}" alt="{{ g.alt }}" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s" style-hover="opacity:.85" />
+        </a>
+      </sc-for>
+    </div></sc-if>
+  </section>
+
+  <footer id="contacto" style="background:#2A221D;color:#F6ECDC;padding:clamp(64px,8vw,100px) clamp(18px,3vw,40px) 36px">
+    <div style="max-width:1240px;margin:0 auto">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:40px;padding-bottom:56px;border-bottom:1px solid rgba(246,236,220,0.16)">
+        <div>
+          <img src="assets/brand/imagotipo-crema.png" alt="Caresia Studio" style="width:150px;height:auto;display:block" />
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;margin-bottom:6px">Tienda</span>
+          <a href="#tienda" style="color:#F6ECDC">Chanterelle Ambre</a>
+          <a href="#tienda" style="color:#F6ECDC">Chanterelle Écaille</a>
+          <a href="#tienda" style="color:#F6ECDC">Chanterelle Noir</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;margin-bottom:6px">Ayuda</span>
+          <a href="#como-comprar" style="color:#F6ECDC">Cómo comprar</a>
+          <a href="#como-comprar" style="color:#F6ECDC">Envíos y entrega en mano</a>
+          <a href="#ayuda" style="color:#F6ECDC">Cuidado de tu vela</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;font-size:14px">
+          <span style="font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#EDBE7E;margin-bottom:6px">Contacto</span>
+          <a href="mailto:caresia.studio@gmail.com" style="color:#F6ECDC">caresia.studio@gmail.com</a>
+          <a href="https://instagram.com/caresia.studio" target="_blank" rel="noopener" style="color:#F6ECDC">Instagram · @caresia.studio</a>
+          <span style="color:rgba(246,236,220,0.7)">Estepona (Málaga)</span>
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:26px;font-size:12px;color:rgba(246,236,220,0.6)">
+        <span style="display:flex;gap:18px;flex-wrap:wrap"><span>© 2026 Caresia Studio · Hecho a mano en Estepona (Málaga)</span><a href="#aviso-legal" onClick="{{ openLegal }}" style="color:rgba(246,236,220,0.8);text-decoration:underline">Aviso legal y privacidad</a></span>
+        <span>Envíos a Península, Baleares y Canarias</span>
+      </div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ productOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ cur.name }}" style="position:fixed;inset:0;z-index:80;background:#F6ECDC;overflow-y:auto;animation:fadeIn .3s ease both">
+      <div style="position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(18px,3vw,40px);background:rgba(246,236,220,0.94);backdrop-filter:blur(10px);border-bottom:1px solid rgba(42,34,29,0.1)">
+        <img src="assets/brand/logotipo.png" alt="Caresia Studio" style="height:30px;width:auto" />
+        <button onClick="{{ closeProduct }}" style="background:none;border:none;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500">Cerrar ✕</button>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:clamp(24px,4vw,64px);max-width:1400px;margin:0 auto;padding:clamp(16px,2vw,28px) clamp(12px,2vw,28px) 80px">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div onTouchStart="{{ swipeStart }}" onTouchEnd="{{ swipeEnd }}" style="position:relative;aspect-ratio:4/5;overflow:hidden;background-color:#EADBC3;touch-action:pan-y">
+            <sc-if value="{{ curMedia.label }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:14px;top:14px;font-family:ui-monospace,Menlo,monospace;font-size:10.5px;color:#5E3A1C;background:#F6ECDC;padding:5px 8px">{{ curMedia.label }}</span></sc-if>
+            <sc-if value="{{ curMedia.isImg }}" hint-placeholder-val="{{ true }}">
+              <img src="{{ curMedia.src }}" alt="{{ cur.name }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+            </sc-if>
+            <sc-if value="{{ curMedia.isVideo }}" hint-placeholder-val="{{ false }}">
+              <video data-auto="1" src="{{ curMedia.src }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+            </sc-if>
+            <button onClick="{{ prevMedia }}" aria-label="Foto anterior" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(246,236,220,0.9);color:#2A221D;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(42,34,29,0.15);transition:background .3s" style-hover="background:#F6ECDC">‹</button>
+            <button onClick="{{ nextMedia }}" aria-label="Foto siguiente" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);width:44px;height:44px;border:none;border-radius:50%;background:rgba(246,236,220,0.9);color:#2A221D;font-size:20px;line-height:1;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(42,34,29,0.15);transition:background .3s" style-hover="background:#F6ECDC">›</button>
+            <span style="position:absolute;right:14px;bottom:14px;font-size:11px;letter-spacing:0.14em;background:rgba(246,236,220,0.9);color:#2A221D;padding:5px 10px">{{ mediaCount }}</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px">
+            <sc-for list="{{ thumbs }}" as="t" hint-placeholder-count="6">
+              <button onClick="{{ t.select }}" aria-label="{{ t.label }}" style="position:relative;aspect-ratio:4/5;padding:0;overflow:hidden;background-color:#EADBC3;border:1px solid {{ t.border }}">
+                <span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:9.5px;letter-spacing:0.1em;text-transform:uppercase;color:#5E3A1C">{{ t.short }}</span>
+                <sc-if value="{{ t.isImg }}" hint-placeholder-val="{{ true }}">
+                  <img src="{{ t.src }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                </sc-if>
+                <sc-if value="{{ t.isVideo }}" hint-placeholder-val="{{ false }}">
+                  <video data-auto="1" src="{{ t.src }}" autoPlay="{{ true }}" muted="{{ true }}" loop="{{ true }}" playsInline="{{ true }}" preload="auto" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none"></video>
+                </sc-if>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <div style="position:relative">
+          <div style="position:sticky;top:90px;display:flex;flex-direction:column;gap:22px;max-width:520px;padding-top:clamp(0px,2vw,24px)">
+            <span style="font-size:11px;letter-spacing:0.26em;text-transform:uppercase;color:#C06C06">Colección Chanterelle</span>
+            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(40px,4.6vw,62px);line-height:1">{{ cur.name }}</h2>
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:12px 16px;flex-wrap:wrap;padding-bottom:22px;border-bottom:1px solid rgba(42,34,29,0.14)">
+              <span style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+                <span style="font-size:22px;font-weight:600;color:#7A2A2E">{{ cur.priceLabel }}</span>
+                <sc-if value="{{ cur.hasCompare }}" hint-placeholder-val="{{ true }}"><span style="font-size:15px;color:#5E3A1C;text-decoration:line-through">{{ cur.compareLabel }}</span><span style="font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;background:#7A2A2E;color:#F6ECDC;padding:4px 8px;margin-left:10px">Oferta de lanzamiento</span></sc-if>
+              </span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:13.5px;color:#5E3A1C"><span style="display:block;width:13px;height:13px;border-radius:50%;background:{{ cur.swatch }};box-shadow:0 0 0 1px rgba(42,34,29,0.2)"></span>{{ cur.tone }}</span>
+            </div>
+            <p style="font-size:16px;color:#5E3A1C;text-wrap:pretty"><sc-for list="{{ cur.parts }}" as="pt"><sc-if value="{{ pt.em }}"><em>{{ pt.t }}</em></sc-if><sc-if value="{{ pt.plain }}">{{ pt.t }}</sc-if></sc-for></p>
+            <div style="display:flex;gap:10px;align-items:stretch">
+              <div style="display:flex;align-items:center;border:1px solid rgba(42,34,29,0.35)">
+                <button onClick="{{ qtyDown }}" aria-label="Menos" style="width:44px;height:52px;background:none;border:none;font-size:18px">−</button>
+                <span style="min-width:28px;text-align:center;font-weight:500">{{ qty }}</span>
+                <button onClick="{{ qtyUp }}" aria-label="Más" style="width:44px;height:52px;background:none;border:none;font-size:18px">+</button>
+              </div>
+              <button onClick="{{ addCurrent }}" style="flex:1;height:54px;border:none;background:#2A221D;color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:#7A2A2E">Añadir al pedido</button>
+            </div>
+            <p style="font-size:13px;color:#5E3A1C">Sin pago online: el pedido se cierra por mensaje directo en Instagram.</p>
+            <div role="note" style="border:1px solid #7A2A2E;padding:18px 20px;display:flex;flex-direction:column;gap:8px">
+              <strong style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#7A2A2E">Importante · Antes de encenderla</strong>
+              <p style="font-size:14px;color:#2A221D;text-wrap:pretty">Retira siempre la pantalla superior antes de encender la vela y no vuelvas a colocarla hasta que esté apagada y el cristal se haya enfriado. Las fotos muestran la pieza montada como idea decorativa: <strong style="font-weight:600">nunca debe arder con la pantalla puesta.</strong></p>
+            </div>
+            <div style="display:flex;flex-direction:column;border-top:1px solid rgba(42,34,29,0.14)">
+              <sc-for list="{{ cur.details }}" as="d" hint-placeholder-count="4">
+                <div style="display:flex;justify-content:space-between;gap:20px;padding:14px 0;border-bottom:1px solid rgba(42,34,29,0.14);font-size:14px">
+                  <span style="color:#5E3A1C">{{ d.k }}</span><span style="font-weight:500;text-align:right;font-style:{{ d.fs }}">{{ d.v }}</span>
+                </div>
+              </sc-for>
+            </div>
+            <div style="background:#DEC29C;padding:20px 22px;font-size:13.5px;display:flex;flex-direction:column;gap:6px">
+              <strong style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;margin-bottom:4px">Preventa · Envío en 15–30 días</strong>
+              <span>Península · 5 €</span>
+              <span>Baleares y Canarias · 12 €</span>
+              <span>Entrega en mano en Estepona · gratis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:90">
+      <div onClick="{{ closeCart }}" style="position:absolute;inset:0;background:rgba(42,34,29,0.45);animation:fadeIn .3s ease both"></div>
+      <aside role="dialog" aria-modal="true" aria-label="Tu pedido" style="position:absolute;top:0;right:0;bottom:0;width:min(460px,100vw);background:#F6ECDC;display:flex;flex-direction:column;animation:slideIn .35s cubic-bezier(.2,.7,.2,1) both">
+        <div style="display:flex;justify-content:space-between;align-items:center;padding:20px 26px;border-bottom:1px solid rgba(42,34,29,0.12)">
+          <span style="font-size:12px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600">{{ cartTitle }}</span>
+          <button onClick="{{ closeCart }}" style="background:none;border:none;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500">Cerrar ✕</button>
+        </div>
+
+        <sc-if value="{{ stepCart }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:1;overflow-y:auto;padding:8px 26px 20px">
+            <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:60px 0;text-align:center;display:flex;flex-direction:column;align-items:center;gap:18px">
+                <img src="assets/brand/isotipo.png" alt="" style="width:70px;opacity:.5" />
+                <p style="font-family:'Cormorant Garamond',serif;font-size:26px">Tu pedido está vacío</p>
+                <button onClick="{{ goShop }}" style="background:none;border:none;border-bottom:1px solid #2A221D;padding-bottom:3px;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500">Ver la colección</button>
+              </div>
+            </sc-if>
+            <sc-for list="{{ cartItems }}" as="c" hint-placeholder-count="1">
+              <div style="display:grid;grid-template-columns:78px 1fr;gap:16px;padding:18px 0;border-bottom:1px solid rgba(42,34,29,0.12)">
+                <div style="position:relative;aspect-ratio:3/4;background:#EADBC3;overflow:hidden">
+                  <img src="{{ c.thumb }}" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;justify-content:space-between;gap:10px">
+                    <span style="font-size:12px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600">{{ c.name }}</span>
+                    <span style="font-size:13.5px;font-weight:500;white-space:nowrap">{{ c.lineLabel }}</span>
+                  </div>
+                  <span style="font-size:13px;color:#5E3A1C">{{ c.tone }}</span>
+                  <div style="display:flex;justify-content:space-between;align-items:center;margin-top:auto">
+                    <div style="display:flex;align-items:center;border:1px solid rgba(42,34,29,0.3)">
+                      <button onClick="{{ c.dec }}" aria-label="Menos" style="width:32px;height:32px;background:none;border:none">−</button>
+                      <span style="min-width:22px;text-align:center;font-size:13.5px">{{ c.qty }}</span>
+                      <button onClick="{{ c.inc }}" aria-label="Más" style="width:32px;height:32px;background:none;border:none">+</button>
+                    </div>
+                    <button onClick="{{ c.remove }}" style="background:none;border:none;font-size:12px;color:#7A2A2E;text-decoration:underline">Quitar</button>
+                  </div>
+                </div>
+              </div>
+            </sc-for>
+
+            <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+              <div style="padding-top:24px">
+                <span style="display:block;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;margin-bottom:12px">Entrega</span>
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <sc-for list="{{ shipOpts }}" as="s" hint-placeholder-count="3">
+                    <button onClick="{{ s.select }}" style="display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;text-align:left;background:{{ s.bg }};border:1px solid {{ s.border }};font-size:14px">
+                      <span style="display:flex;flex-direction:column"><span style="font-weight:500">{{ s.label }}</span><span style="font-size:12.5px;color:#5E3A1C">{{ s.note }}</span></span>
+                      <span style="font-weight:500;white-space:nowrap">{{ s.priceLabel }}</span>
+                    </button>
+                  </sc-for>
+                </div>
+                <button onClick="{{ toggleGift }}" aria-pressed="{{ gift }}" style="margin-top:18px;width:100%;display:flex;gap:14px;align-items:flex-start;padding:14px 16px;text-align:left;background:{{ giftBg }};border:1px solid {{ giftBorder }};font-size:14px">
+                  <span style="flex:none;width:18px;height:18px;margin-top:2px;border:1px solid #2A221D;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;background:{{ giftBox }};color:#F6ECDC">{{ giftMark }}</span>
+                  <span style="display:flex;flex-direction:column"><span style="font-weight:500">Es para regalo</span><span style="font-size:12.5px;color:#5E3A1C">Lo preparamos de forma especial, con una nota escrita a mano con tu dedicatoria. Los detalles los concretamos contigo por Instagram.</span></span>
+                </button>
+              </div>
+            </sc-if>
+          </div>
+          <sc-if value="{{ cartHasItems }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:20px 26px 26px;border-top:1px solid rgba(42,34,29,0.12);display:flex;flex-direction:column;gap:8px;font-size:14px">
+              <div style="display:flex;justify-content:space-between"><span style="color:#5E3A1C">Subtotal</span><span>{{ subtotalLabel }}</span></div>
+              <div style="display:flex;justify-content:space-between"><span style="color:#5E3A1C">Entrega</span><span>{{ shipLabel }}</span></div>
+              <div style="display:flex;justify-content:space-between;font-size:17px;font-weight:600;margin-top:6px"><span>Total</span><span>{{ totalLabel }}</span></div>
+              <p style="font-size:12.5px;color:#5E3A1C;background:#F1E3CC;padding:10px 12px;margin-top:6px;text-wrap:pretty"><strong style="font-weight:600;color:#7A2A2E">Preventa:</strong> las piezas se elaboran a mano tras tu pedido. El envío puede tardar entre 15 y 30 días.</p>
+              <button onClick="{{ orderInstagram }}" style="margin-top:14px;height:54px;border:none;background:#2A221D;color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;transition:background .3s" style-hover="background:#7A2A2E">Pedir por Instagram</button>
+              <p style="font-size:12.5px;color:#5E3A1C;text-align:center;text-wrap:pretty">Copiamos tu pedido y abrimos nuestro chat de Instagram: solo tienes que pegarlo y enviarlo.</p>
+            </div>
+          </sc-if>
+        </sc-if>
+
+        <sc-if value="{{ stepDone }}" hint-placeholder-val="{{ false }}">
+          <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:20px;padding:40px 30px">
+            <img src="assets/brand/emboss-isologo.png" alt="" style="width:110px" />
+            <p style="font-family:'Cormorant Garamond',serif;font-size:34px;line-height:1.1">Tu pedido está copiado</p>
+            <p style="font-size:15px;color:#5E3A1C;max-width:330px">Pégalo en el chat de Instagram que se ha abierto y envíalo. Te respondemos allí para confirmar el pago y la entrega.</p>
+            <pre style="width:100%;max-width:360px;text-align:left;white-space:pre-wrap;font-family:inherit;font-size:13px;line-height:1.5;color:#2A221D;background:#F1E3CC;padding:14px 16px;user-select:all">{{ orderText }}</pre>
+            <button onClick="{{ copyAgain }}" style="background:none;border:1px solid #2A221D;height:44px;padding:0 22px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500">Copiar el pedido otra vez</button>
+            <a href="https://ig.me/m/caresia.studio" target="_blank" rel="noopener" style="font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;border-bottom:1px solid #2A221D;padding-bottom:3px">Abrir el chat de nuevo</a>
+            <button onClick="{{ closeCart }}" style="margin-top:8px;height:50px;padding:0 28px;border:none;background:#2A221D;color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500">Seguir mirando</button>
+          </div>
+        </sc-if>
+      </aside>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ lbOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ lbName }}" onClick="{{ lbClose }}" onTouchStart="{{ lbSwipeStart }}" onTouchEnd="{{ lbSwipeEnd }}" style="position:fixed;inset:0;z-index:85;background:rgba(42,34,29,0.94);display:flex;align-items:center;justify-content:center;padding:clamp(56px,6vw,80px) clamp(12px,6vw,96px);animation:fadeIn .3s ease both;touch-action:pan-y">
+      <img src="{{ lbSrc }}" alt="{{ lbName }}" onClick="{{ lbStop }}" style="max-width:100%;max-height:100%;object-fit:contain;display:block;box-shadow:0 20px 60px rgba(0,0,0,0.4)" />
+      <button onClick="{{ lbClose }}" style="position:absolute;top:18px;right:clamp(14px,3vw,32px);background:none;border:none;color:#F6ECDC;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:8px">Cerrar ✕</button>
+      <button onClick="{{ lbPrev }}" aria-label="Foto anterior" style="position:absolute;left:clamp(10px,2vw,28px);top:50%;transform:translateY(-50%);width:48px;height:48px;border:none;border-radius:50%;background:rgba(246,236,220,0.92);color:#2A221D;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center">‹</button>
+      <button onClick="{{ lbNext }}" aria-label="Foto siguiente" style="position:absolute;right:clamp(10px,2vw,28px);top:50%;transform:translateY(-50%);width:48px;height:48px;border:none;border-radius:50%;background:rgba(246,236,220,0.92);color:#2A221D;font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center">›</button>
+      <div style="position:absolute;left:0;right:0;bottom:18px;display:flex;justify-content:center;gap:16px;color:#F6ECDC;font-size:11.5px;letter-spacing:0.16em;text-transform:uppercase"><span>{{ lbName }}</span><span style="color:#EDBE7E">{{ lbCount }}</span></div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ legalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:88">
+      <div onClick="{{ closeLegal }}" style="position:absolute;inset:0;background:rgba(42,34,29,0.5);animation:fadeIn .3s ease both"></div>
+      <div role="dialog" aria-modal="true" aria-label="Aviso legal y privacidad" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(680px,calc(100vw - 24px));max-height:calc(100svh - 48px);overflow-y:auto;background:#F6ECDC;padding:clamp(28px,5vw,52px);animation:fadeIn .3s ease both">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:22px">
+          <h2 style="font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4vw,42px);line-height:1.05">Aviso legal y privacidad</h2>
+          <button onClick="{{ closeLegal }}" style="flex:none;background:none;border:none;font-size:11.5px;letter-spacing:0.18em;text-transform:uppercase;font-weight:500;padding:8px 0">Cerrar ✕</button>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:20px;font-size:14.5px;color:#5E3A1C;text-wrap:pretty">
+          <div><h3 style="font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#2A221D;margin-bottom:6px">Quién está detrás</h3><p>Caresia Studio es un proyecto artesanal con sede en Estepona (Málaga). Contacto: <a href="mailto:caresia.studio@gmail.com" style="text-decoration:underline">caresia.studio@gmail.com</a> · Instagram <a href="https://instagram.com/caresia.studio" target="_blank" rel="noopener" style="text-decoration:underline">@caresia.studio</a>.</p></div>
+          <div><h3 style="font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#2A221D;margin-bottom:6px">Pedidos</h3><p>Esta web es un escaparate: no hay pago online. Los pedidos se cierran por mensaje directo en Instagram, donde confirmamos disponibilidad, precio final, forma de pago y entrega antes de que pagues nada. Las piezas están en preventa y se envían en un plazo de 15 a 30 días.</p></div>
+          <div><h3 style="font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#2A221D;margin-bottom:6px">Tus datos</h3><p>Esta web no te pide datos personales ni usa cookies de seguimiento o publicidad. Tu pedido se guarda solo en tu propio navegador para que no lo pierdas. Los datos que nos des por Instagram (nombre, dirección, teléfono) se usan únicamente para preparar y enviar tu pedido, no se ceden a nadie y puedes pedirnos que los borremos cuando quieras escribiendo a caresia.studio@gmail.com.</p></div>
+          <div><h3 style="font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#2A221D;margin-bottom:6px">Contenidos de terceros</h3><p>La sección de Instagram muestra nuestras publicaciones a través de un servicio externo (Behold). Al pulsar en ellas, sales a Instagram, que tiene su propia política de privacidad.</p></div>
+          <div><h3 style="font-size:11.5px;letter-spacing:0.2em;text-transform:uppercase;font-weight:600;color:#2A221D;margin-bottom:6px">Uso seguro</h3><p>Retira siempre la pantalla superior antes de encender la vela, no la dejes encendida sin vigilancia y mantenla fuera del alcance de niños y mascotas.</p></div>
+          <p style="font-size:12.5px">Las fotografías, textos y diseños de esta web son de Caresia Studio. Última actualización: octubre de 2026.</p>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);z-index:95;background:#2A221D;color:#F6ECDC;padding:14px 22px;font-size:13px;letter-spacing:0.04em;animation:fadeUp .3s ease both">{{ toastText }}</div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;heroTreatment&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Grano + velo&quot;,&quot;Grano&quot;,&quot;Velado&quot;,&quot;Original&quot;],&quot;default&quot;:&quot;Grano&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Portada&quot;},&quot;launchOffer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Precios&quot;},&quot;priceLaunch&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:49.9,&quot;min&quot;:0,&quot;max&quot;:200,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;€&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Precios&quot;},&quot;priceRegular&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:54.9,&quot;min&quot;:0,&quot;max&quot;:200,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;€&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Precios&quot;},&quot;formEndpoint&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Formularios&quot;},&quot;heroLogo&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Portada&quot;}}">
+const PRODUCTS = [
+  { slug: 'ambre', name: 'Chanterelle Ambre', tone: 'Ámbar', swatch: '#C06C06', priceKey: 'priceAmbre',
+    desc: 'Motas anaranjadas, rojizas y blancas, alegres como el rebozuelo que le da nombre. Apagada, es una lámpara que alegra cualquier rincón solo con su color; encendida, una vela que perfuma la casa de nuestro aroma *Atardecer*.' },
+  { slug: 'ecaille', name: 'Chanterelle Écaille', tone: 'Carey', swatch: '#5E3A1C', priceKey: 'priceEcaille',
+    desc: 'El clásico carey: manchas marrones sobre un fondo miel que, al encender la vela, brilla como el ámbar. Una lámpara para decorar que, al encenderla, perfuma la casa de nuestro aroma *Atardecer*.' },
+  { slug: 'noir', name: 'Chanterelle Noir', tone: 'Negro', swatch: '#2A221D', priceKey: 'priceNoir',
+    desc: 'Motas negras sobre cristal transparente y cera blanca: gráfica, elegante, la más atrevida de las tres. Decora como una lámpara de diseño y, encendida, envuelve la habitación en nuestro aroma *Atardecer*, dulce y cálido.' }
+];
+const SHIP = [
+  { id: 'peninsula', label: 'Península', note: 'Envío a domicilio', price: 5 },
+  { id: 'canarias', label: 'Baleares y Canarias', note: 'Envío a domicilio', price: 12 },
+  { id: 'mano', label: 'Entrega en mano en Estepona', note: 'Te ahorras el envío', price: 0 }
+];
+const FAQS = [
+  ['¿Es una lámpara o una vela?', 'Las dos cosas. *Chanterelle* tiene forma de lámpara y decora como tal cuando está apagada, pero en realidad es una vela: la enciendes y da luz cálida y aroma.'],
+  ['¿De qué está hecha?', 'Cada envase contiene 280 gramos de cera de soja de calidad premium, una cera vegetal que arde de forma limpia, lenta y uniforme. Encendida dura 35–45 horas aproximadamente.'],
+  ['¿A qué huele?', 'Huele a esa hora lenta después de comer, cuando la casa se queda en penumbra y por fin tienes un momento solo para ti. Al encenderla notarás primero la almendra dulce, suavizada con coco y un punto fresco de manzana verde. Poco a poco aparece el corazón: cereza al marrasquino, una pizca especiada de anís estrellado y frambuesa. Y cuando la vela lleva un rato encendida, queda el fondo: caramelo de mantequilla, vainilla y un almizcle suave que se queda en la habitación. Seductora, irresistible y muy golosa.'],
+  ['¿La fragancia es segura?', 'Usamos una fragancia de alta calidad con certificado IFRA y conforme a la normativa europea CLP, sin ftalatos ni parabenos, vegana y cruelty free. Como con cualquier vela, úsala en un espacio ventilado y nunca la dejes encendida sin vigilancia.'],
+  ['¿Por qué cada pieza es un poco distinta?', 'Porque se hacen a mano, una a una, y los envases son de vidrio soplado: cada uno sale con su propia forma, sus matices y pequeñas burbujas, así que no hay dos iguales. Esas variaciones de tono y acabado son justo lo que hace única a cada pieza.'],
+  ['¿Se puede encender con la pantalla puesta?', 'No. La pantalla superior es decorativa y se coloca solo cuando la vela está apagada. Antes de encenderla, retírala y déjala a un lado; cuando la apagues, espera a que el cristal se enfríe y vuelve a montarla. Encenderla con la pantalla puesta puede hacer que el cristal se sobrecaliente y se rompa, que la llama se ahogue y genere hollín, y que la vela se consuma mal.'],
+  ['¿Cómo hago un pedido?', 'Añade tus velas al pedido y pulsa «Pedir por Instagram». Copiamos el resumen y se abre nuestro chat (@caresia.studio): lo pegas, lo envías y te respondemos para confirmar disponibilidad, pago y envío. No hay pago online.'],
+  ['¿Cuándo recibiré mi pedido?', 'Ahora mismo estamos en preventa: cada pieza se elabora a mano después de tu pedido, así que el envío puede tardar entre 15 y 30 días. Te iremos contando por Instagram cómo va y te avisaremos cuando salga del taller.'],
+  ['¿Cuánto cuesta el envío?', 'Península: 5 €. Baleares y Canarias: 12 €. Si estás en Estepona (Málaga) o alrededores, podemos entregártela en mano y te ahorras el envío.'],
+  ['¿Cómo cuido mi vela?', 'Lo más importante: retira siempre la pantalla superior (el sombrerito de la seta) antes de encenderla y no la vuelvas a colocar hasta que la vela esté apagada y el cristal se haya enfriado. En el primer encendido, déjala arder hasta que toda la superficie se funda para que no haga túnel. Recorta la mecha antes de cada uso, no la dejes encendida sin vigilancia y mantenla lejos de corrientes de aire.'],
+];
+const hideMedia = e => { e.currentTarget.style.display = 'none'; };
+const fmt = n => (n > 0 ? (Number.isInteger(n) ? n : n.toFixed(2).replace('.', ',')) + ' €' : 'Gratis');
+const LOOK = [
+        { src: 'assets/ambiente/ambiente-2.jpg', name: 'A la luz de la tarde', pos: '50% 62%' },
+        { src: 'assets/ambiente/ambiente-3.jpg', name: 'Cada una en su rincón' },
+        { src: 'assets/ambiente/ambiente-4.jpg', name: 'De cerca' }
+      ];
+const LAUNCH = 49.9, REGULAR = 54.9;
+
+class Component extends DCLogic {
+  state = { legal: false, gift: false, lb: null, open: null, media: 0, qty: 1, cart: {}, cartOpen: false, step: 'cart', ship: 'peninsula',
+            nlSent: false, faq: 0, menuOpen: false, w: 1200, toast: '' };
+
+  componentDidMount() {
+    fetch('https://feeds.behold.so/wXMn9JcaYaHwDksBfUYl').then(r => r.json()).then(d => {
+      const posts = Array.isArray(d) ? d : (d.posts || []);
+      const ig = posts.map(p => {
+        const img = (p.sizes && (p.sizes.medium || p.sizes.large || p.sizes.small) || {}).mediaUrl
+          || (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl) || p.thumbnailUrl;
+        return { src: img, href: p.permalink || 'https://instagram.com/caresia.studio',
+          alt: (p.prunedCaption || p.caption || 'Publicación de Instagram de Caresia Studio').slice(0, 120) };
+      }).filter(p => p.src);
+      this.setState({ ig });
+    }).catch(() => {});
+    try { const c = JSON.parse(localStorage.getItem('caresia-cart') || '{}'); if (c && typeof c === 'object') this.setState({ cart: c }); } catch (e) {}
+    this.onResize = () => this.setState({ w: window.innerWidth });
+    this.onResize(); window.addEventListener('resize', this.onResize);
+    this.onKey = e => { if (e.key === 'Escape') this.setState({ open: null, cartOpen: false, legal: false });
+      if (this.state.lb != null) { if (e.key === 'Escape') this.setState({ lb: null }); if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') this.setState(s => ({ lb: (s.lb + (e.key === 'ArrowRight' ? 1 : -1) + LOOK.length) % LOOK.length })); return; }
+      if (this.state.open && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) this.setState(s => ({ media: (s.media + (e.key === 'ArrowRight' ? 1 : -1) + 6) % 6 })); };
+    window.addEventListener('keydown', this.onKey);
+    this.playVideos();
+  }
+  componentDidUpdate() { this.playVideos(); document.body.style.overflow = (this.state.open || this.state.cartOpen || this.state.legal || this.state.lb != null) ? 'hidden' : ''; }
+  componentWillUnmount() { window.removeEventListener('resize', this.onResize); window.removeEventListener('keydown', this.onKey); clearTimeout(this.tt); }
+  playVideos() { document.querySelectorAll('video[data-auto]').forEach(v => { v.muted = true; v.volume = 0; v.setAttribute('muted', ''); if (v.paused) v.play().catch(() => {}); }); }
+
+  onSale() { return this.props.launchOffer ?? true; }
+  regular() { return Number(this.props.priceRegular ?? REGULAR) || REGULAR; }
+  price() { return this.onSale() ? (Number(this.props.priceLaunch ?? LAUNCH) || LAUNCH) : this.regular(); }
+  priceLabel() { return fmt(this.price()); }
+  compare() { return { hasCompare: this.onSale(), compareLabel: fmt(this.regular()) }; }
+  media(slug) {
+    const b = `assets/productos/${slug}/`;
+    return [
+      { type: 'img', src: b + 'miniatura.png', label: '', short: '' },
+      { type: 'img', src: b + 'foto-a.jpg', label: '', short: '' },
+      { type: 'img', src: b + 'foto-b.jpg', label: '', short: '' },
+      { type: 'img', src: b + 'foto-c.jpg', label: '', short: '' },
+      { type: 'video', src: b + 'video-1.mp4', label: '', short: '' },
+      { type: 'video', src: b + 'video-2.mp4', label: '', short: '' }
+    ];
+  }
+  save(cart) { try { localStorage.setItem('caresia-cart', JSON.stringify(cart)); } catch (e) {} }
+  setCart(fn) { this.setState(s => { const cart = fn({ ...s.cart }); Object.keys(cart).forEach(k => { if (cart[k] <= 0) delete cart[k]; }); this.save(cart); return { cart }; }); }
+  add(slug, n = 1) {
+    this.setCart(c => { c[slug] = (c[slug] || 0) + n; return c; });
+    const p = PRODUCTS.find(x => x.slug === slug);
+    this.setState({ toast: `${p.name} añadida a tu pedido` });
+    clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2400);
+  }
+  async post(payload) {
+    const ep = this.props.formEndpoint;
+    if (!ep) return false;
+    try { await fetch(ep, { method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' }, body: JSON.stringify(payload) }); } catch (e) {}
+    return true;
+  }
+
+  renderVals() {
+    const s = this.state;
+    const wide = s.w >= 980;
+    const ship = SHIP.find(x => x.id === s.ship) || SHIP[0];
+    const items = PRODUCTS.filter(p => s.cart[p.slug]).map(p => ({ ...p, qty: s.cart[p.slug], unit: this.price(p) }));
+    const unknown = items.some(i => !i.unit);
+    const subtotal = items.reduce((a, i) => a + i.unit * i.qty, 0);
+    const count = items.reduce((a, i) => a + i.qty, 0);
+    const cur = PRODUCTS.find(p => p.slug === s.open);
+    const curMediaList = cur ? this.media(cur.slug) : [];
+    const cm = curMediaList[s.media] || {};
+    const orderText = () => `¡Hola! Quiero hacer este pedido en preventa:\n\n${summary()}\n\nEntrega: ${ship.label} (${fmt(ship.price)})\nTotal: ${unknown ? 'a confirmar' : fmt(subtotal + ship.price)}${s.gift ? '\n\n🎁 Es para regalo' : ''}`;
+    const summary = () => items.map(i => `${i.qty} × ${i.name}${i.unit ? ' (' + fmt(i.unit * i.qty) + ')' : ''}`).join('\n');
+
+    return {
+      wide, narrow: !wide,
+      menuOpen: s.menuOpen && !wide,
+      menuLabel: s.menuOpen ? 'Cerrar' : 'Menú',
+      toggleMenu: () => this.setState({ menuOpen: !s.menuOpen }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      badge: this.onSale() ? 'Lanzamiento' : 'Nuevo',
+      heroLogo: this.props.heroLogo ?? false,
+      ...(() => { const t = this.props.heroTreatment ?? 'Grano'; return {
+        heroGrain: t.includes('Grano'), heroVeil: t.includes('velo') || t === 'Velado',
+        heroOpacity: t === 'Velado' ? 0.82 : 1,
+        heroFilter: 'none' }; })(),
+
+      products: PRODUCTS.map(p => ({
+        ...p, priceLabel: this.priceLabel(p), ...this.compare(),
+        thumb: `assets/productos/${p.slug}/miniatura.jpg`, hover: `assets/productos/${p.slug}/foto-a.jpg`,
+        thumbLabel: '',
+        open: () => this.setState({ open: p.slug, media: 0, qty: 1 }),
+        quickAdd: e => { e.stopPropagation(); this.add(p.slug); }
+      })),
+      lookbook: LOOK.map((l, i) => ({ pos: '50% 50%', ...l, open: () => this.setState({ lb: i }) })),
+      lbOpen: s.lb != null,
+      lbSrc: s.lb != null ? LOOK[s.lb].src : '',
+      lbName: s.lb != null ? LOOK[s.lb].name : '',
+      lbCount: s.lb != null ? `${s.lb + 1} / ${LOOK.length}` : '',
+      lbClose: () => this.setState({ lb: null }),
+      lbPrev: e => { e && e.stopPropagation(); this.setState({ lb: (s.lb - 1 + LOOK.length) % LOOK.length }); },
+      lbNext: e => { e && e.stopPropagation(); this.setState({ lb: (s.lb + 1) % LOOK.length }); },
+      lbStop: e => e.stopPropagation(),
+      lbSwipeStart: e => { this.lx = e.touches[0].clientX; },
+      lbSwipeEnd: e => { const dx = e.changedTouches[0].clientX - (this.lx ?? 0); if (Math.abs(dx) > 40) this.setState({ lb: (s.lb + (dx < 0 ? 1 : -1) + LOOK.length) % LOOK.length }); },
+      insta: (s.ig && s.ig.length ? s.ig : []).slice(0, 6),
+      hasInsta: !!(s.ig && s.ig.length),
+      faqs: FAQS.map(([q, a], i) => ({ q, parts: a.split(/(\*[^*]+\*)/).filter(Boolean).map(t => t.startsWith('*') ? { t: t.slice(1, -1), em: true, plain: false } : { t, em: false, plain: true }), open: s.faq === i, sign: s.faq === i ? '−' : '+', toggle: () => this.setState({ faq: s.faq === i ? -1 : i }) })),
+
+      productOpen: !!cur,
+      cur: cur ? { ...cur, priceLabel: this.priceLabel(cur), ...this.compare(), parts: cur.desc.split(/(\*[^*]+\*)/).filter(Boolean).map(t => t.startsWith('*') ? { t: t.slice(1, -1), em: true, plain: false } : { t, em: false, plain: true }),
+        details: [
+          { k: 'Hecha a mano en', v: 'Estepona (Málaga)' },
+          { k: 'Tono', v: cur.tone },
+          { k: 'Uso', v: 'Lámpara decorativa y vela' },
+          { k: 'Aroma', v: 'Atardecer', em: true },
+          { k: 'Notas', v: 'Almendra dulce, coco, cereza, caramelo de mantequilla y vainilla' },
+          { k: 'Fragancia', v: 'Vegana y cruelty free · Sin ftalatos ni parabenos · IFRA' },
+          { k: 'Material', v: 'Cera de soja premium · 280 g' },
+          { k: 'Medidas (lámpara completa)', v: '15 cm ancho × 16,5 cm alto' },
+          { k: 'Pantalla superior', v: 'Ø 9,4 cm arriba · Ø 12 cm base · 10 cm alto' },
+          { k: 'Envase', v: 'Ø 7,8 cm arriba · Ø 10 cm base · 9 cm alto' },
+          { k: 'Tiempo de combustión', v: '35–45 horas' }
+        ].map(d => ({ ...d, fs: d.em ? 'italic' : 'normal' })) } : { details: [], parts: [] },
+      curMedia: { ...cm, isImg: cm.type === 'img', isVideo: cm.type === 'video' },
+      mediaCount: `${s.media + 1} / ${curMediaList.length}`,
+      prevMedia: () => this.setState({ media: (s.media - 1 + curMediaList.length) % curMediaList.length }),
+      nextMedia: () => this.setState({ media: (s.media + 1) % curMediaList.length }),
+      swipeStart: e => { this.sx = e.touches[0].clientX; },
+      swipeEnd: e => { const dx = e.changedTouches[0].clientX - (this.sx ?? 0); if (Math.abs(dx) > 40) this.setState({ media: (s.media + (dx < 0 ? 1 : -1) + curMediaList.length) % curMediaList.length }); },
+      thumbs: curMediaList.map((m, i) => ({ ...m, isImg: m.type === 'img', isVideo: m.type === 'video', border: i === s.media ? '#2A221D' : 'transparent', select: () => this.setState({ media: i }) })),
+      closeProduct: () => this.setState({ open: null }),
+      qty: s.qty,
+      qtyUp: () => this.setState({ qty: Math.min(10, s.qty + 1) }),
+      qtyDown: () => this.setState({ qty: Math.max(1, s.qty - 1) }),
+      addCurrent: () => { this.add(cur.slug, s.qty); this.setState({ open: null, cartOpen: true, step: 'cart' }); },
+
+      gift: !!s.gift, giftMark: s.gift ? '✓' : '', giftBox: s.gift ? '#2A221D' : 'transparent',
+      giftBg: s.gift ? '#FBF6EE' : 'transparent', giftBorder: s.gift ? '#2A221D' : 'rgba(42,34,29,0.22)',
+      toggleGift: () => this.setState({ gift: !s.gift }),
+      legalOpen: !!s.legal, openLegal: e => { e && e.preventDefault(); this.setState({ legal: true }); }, closeLegal: () => this.setState({ legal: false }),
+      cartCount: count,
+      cartOpen: s.cartOpen,
+      openCart: () => this.setState({ cartOpen: true, step: s.step === 'done' ? 'cart' : s.step }),
+      closeCart: () => this.setState({ cartOpen: false, step: s.step === 'done' ? 'cart' : s.step }),
+      goShop: () => { this.setState({ cartOpen: false }); location.hash = 'tienda'; },
+      cartTitle: s.step === 'done' ? 'Casi listo' : `Tu pedido (${count})`,
+      stepCart: s.step !== 'done', stepDone: s.step === 'done',
+      cartEmpty: !items.length, cartHasItems: items.length > 0,
+      cartItems: items.map(i => ({ ...i, thumb: `assets/productos/${i.slug}/miniatura.jpg`,
+        lineLabel: i.unit ? fmt(i.unit * i.qty) : '—',
+        inc: () => this.setCart(c => { c[i.slug]++; return c; }),
+        dec: () => this.setCart(c => { c[i.slug]--; return c; }),
+        remove: () => this.setCart(c => { delete c[i.slug]; return c; }) })),
+      shipOpts: SHIP.map(o => ({ ...o, priceLabel: fmt(o.price),
+        bg: o.id === s.ship ? '#FBF6EE' : 'transparent', border: o.id === s.ship ? '#2A221D' : 'rgba(42,34,29,0.22)',
+        select: () => this.setState({ ship: o.id }) })),
+      shipName: ship.label, shipLabel: fmt(ship.price),
+      needsAddress: ship.id !== 'mano',
+      subtotalLabel: unknown ? 'Te lo confirmamos' : fmt(subtotal),
+      totalLabel: unknown ? 'Te lo confirmamos' : fmt(subtotal + ship.price),
+      orderInstagram: () => {
+        const text = orderText();
+        let copied = false;
+        try { navigator.clipboard.writeText(text).then(() => this.setState({ copied: true }), () => this.setState({ copied: false })); copied = true; } catch (e) {}
+        window.open('https://ig.me/m/caresia.studio', '_blank', 'noopener');
+        this.setState({ step: 'done', copied });
+      },
+      orderText: orderText(),
+      copyAgain: () => { try { navigator.clipboard.writeText(orderText()).then(() => this.setState({ copied: true, toast: 'Pedido copiado' })); clearTimeout(this.tt); this.tt = setTimeout(() => this.setState({ toast: '' }), 2000); } catch (e) {} },
+      goCart: () => this.setState({ step: 'cart' }),
+      submitOrder: async e => {
+        e.preventDefault();
+        const d = Object.fromEntries(new FormData(e.currentTarget).entries());
+        const total = unknown ? 'a confirmar' : fmt(subtotal + ship.price);
+        const text = `Nuevo pedido — Caresia Studio\n\n${summary()}\n\nEntrega: ${ship.label} (${fmt(ship.price)})\nTotal: ${total}\n\nNombre: ${d.nombre}\nTeléfono: ${d.telefono}\nEmail: ${d.email || '-'}\n` +
+          (ship.id !== 'mano' ? `Dirección: ${d.direccion}, ${d.cp} ${d.ciudad}\n` : '') + `Notas: ${d.notas || '-'}`;
+        const sent = await this.post({ tipo: 'pedido', _subject: `Nuevo pedido web — ${d.nombre}`, ...d, entrega: ship.label, total, pedido: text });
+        if (!sent) window.open('mailto:caresia.studio@gmail.com?subject=' + encodeURIComponent('Nuevo pedido — ' + d.nombre) + '&body=' + encodeURIComponent(text), '_blank');
+        this.save({}); this.setState({ step: 'done', cart: {} });
+      },
+
+      nlSent: s.nlSent, nlNotSent: !s.nlSent,
+      submitNewsletter: async e => {
+        e.preventDefault();
+        const email = new FormData(e.currentTarget).get('email');
+        await this.post({ tipo: 'newsletter', _subject: 'Nueva suscripción', email });
+        this.setState({ nlSent: true });
+      },
+
+      toast: !!s.toast, toastText: s.toast
+    };
+  }
+}
+</script>
+</body>
+</html>
